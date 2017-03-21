@@ -1,0 +1,92 @@
+﻿body {
+    padding-top: 15px;
+    padding-bottom: 20px;
+        color: #fff;
+    background-color: rgba(0,0,0,0.9);
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.wraptext {
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.uploadFile::-ms-value {
+    visibility: collapse;
+}
+.folder-icon {
+    left: -15px;
+    font-size: 14px;
+    /*position:static;*/
+}
+.file-icon {
+    color: #5bc0de;
+    left: -13px;
+    font-size: 15px;
+    top: 3px;
+}
+
+.list-group{color:#000;margin:0 auto;}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 5px 5px 1px 10px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+    font-family: monospace;
+}
+.panel-body {
+    padding: 10px 10px 5px 10px;
+}
+.progress {margin-bottom:5px;
+}
+.upButton{border: 1px solid #2196f3;
+    padding: 1px 2px 1px 1px;
+    border-radius: 15px;
+    color: #2196f3;}
+.dirButton{cursor:pointer;}
+a.folderButton{cursor:pointer;color:#000;}a.folderButton:hover{color:#428bca;}
+.top-line-menu{background: rgba(0,0,0,0.76);
+    padding: 5px 0px 5px 5px;
+    margin: 0;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    font-size: 21px;
+    color: #fff;}
+.align-center{text-align:center;}
+.top-line-submenu{opacity:0.85;color: #2196f3;}
+.drive-panel{color:#000;}
+.active-drive{box-shadow: 2px 5px 11px #428bca;
+    border: 3px solid #5bc0de;}
+span.ng-binding {
+    color: #2196f3;
+    font-size: 18px;
+    font-weight: 600;
+}
+.path-line{font-size: 21px;}
+.rootButton:hover {text-decoration:underline;}.rootButton{cursor:pointer;color:#000}.rootButton.current{color:#0088cc;}
+                                                                                    
+#preloader {    background: #fff;display:none;
+    z-index: 1;
+    text-align: center;}
+#preloader img{    margin: 120px;
+    height: 250px;
+    width: 250px;}
+#filemanager {display:block;
+}

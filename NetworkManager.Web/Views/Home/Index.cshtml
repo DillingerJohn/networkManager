@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html ng-app="NetworkManager">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>File Manager</title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.css" rel="stylesheet">
+        @Styles.Render("~/Assets/Styles/CSS")
+</head>
+<body ng-controller="GlobalController">
+    <div class="container body-content">
+        <section class="row" ng-show="Global.isAuthenticated">
+            <a ng-click="Global.logOut()" class="btn btn-lg btn-default pull-right"><span class="mdi-action-settings-power"></span></a>
+        </section>
+
+        <ng-view>
+
+        </ng-view>
+        
+        <hr />
+        <footer class="footer">
+            <div class="row">
+                <div class="col-md-12">
+                    @DateTime.Now.Year
+                </div>
+            </div>
+        </footer>
+        <br />
+    </div>
+    @Scripts.Render("~/Assets/Scripts/JS")
+   <script src="~/App/Services/Interceptors/errorHandler.js"></script>
+    <script src="~/App/Services/Interceptors/xmlHttpInterceptor.js"></script>
+    <script src="~/App/Services/Account/storageHandler.js"></script>
+    <script src="~/App/Services/Account/tokenHandler.js"></script>
+    <script src="~/App/Services/Account/authService.js"></script>
+    <script src="~/App/Route/routeConfig.js"></script>
+    <script src="~/App/Services/Directory/directoryService.js"></script>
+    <script src="~/App/Services/Contact/contactService.js"></script>
+    <script src="~/App/Controllers/Global/globalController.js"></script>
+    <script src="~/App/Controllers/Account/loginController.js"></script>
+    <script src="~/App/Controllers/Account/registerController.js"></script>
+    <script src="~/App/Controllers/Directory/directoryController.js"></script>
+    <script src="~/App/Controllers/Contact/contactController.js"></script>
+    <script src="~/App/Controllers/Contact/contactFormModalController.js"></script>
+   
+     <script type="text/javascript">
+        $(document).ready(function () {
+            $.material.init();
+        });
+    </script>
+</body>
+</html>
+

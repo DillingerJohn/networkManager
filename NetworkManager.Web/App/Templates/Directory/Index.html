@@ -1,0 +1,103 @@
+﻿
+<div class="row">
+    <h2>File Manager</h2>
+    <div class="col-md-4" ng-repeat="drive in drives">
+        <div ng-if="drive.iScurrent==true" class="panel panel-info drive-panel active-drive">
+            <div class="panel-body">
+                <div class="row-content">
+                    <h4 class="list-group-item-heading"><a class="rootButton current" ng-click="Actions.openRoot(drive.dName)"><i class="hdd-icon glyphicon glyphicon-hdd" alt="HDD"></i> {{drive.dVolumeLabel}} ({{drive.dName.rootPath}})</a></h4>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{drive.dTotalSize-drive.dTotalFreeSpace}}"
+                             aria-valuemin="0" aria-valuemax="{{drive.dTotalSize}}" style="width:{{drive.dTotalFreeSpace*100/drive.dTotalSize}}%">
+                        </div>
+                    </div>
+                    <p class="list-group-item-text">Total disk space: {{drive.dTotalSizeGB}} gb</p>
+                    <p class="list-group-item-text">Available space: {{drive.dTotalSizeGB - drive.dTotalFreeSpaceGB}} gb</p>
+                </div>
+            </div>
+        </div>
+        <div ng-if="drive.iScurrent==false" class="panel panel-warning drive-panel">
+            <div class="panel-body">
+                <div class="row-content">
+                    <h4 class="list-group-item-heading"><a class="rootButton" ng-click="Actions.openRoot(drive.dName)"><i class="hdd-icon glyphicon glyphicon-hdd" alt="HDD"></i> {{drive.dVolumeLabel}} ({{drive.dName.rootPath}})</a></h4>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{drive.dTotalSize-drive.dTotalFreeSpace}}"
+                             aria-valuemin="0" aria-valuemax="{{drive.dTotalSize}}" style="width:{{drive.dTotalFreeSpace*100/drive.dTotalSize}}%">
+                        </div>
+                    </div>
+                    <p class="list-group-item-text">Total disk space: {{drive.dTotalSizeGB}} gb</p>
+                    <p class="list-group-item-text">Available space: {{drive.dTotalSizeGB - drive.dTotalFreeSpaceGB}} gb</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-repeat="dir in directory">
+    <div class="row">
+        <div class="col-md-12">
+            <h5 class="path-line"><span>current path:</span> <a>{{dir.path.path}}</a></h5>
+            <ul id="preloader" class="list-group preloader"><img src="/Assets/images/preloader.gif" /></ul>
+            <ul id="filemanager" class="list-group">
+                <li class="list-group-item list-group-item top-line-menu">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">name</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">size (Mb)</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 align-center">Less 10Mb</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 align-center">10Mb - 50Mb</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 align-center">More 100Mb</div>
+                    </div>
+                </li>
+                <!-- Total top line(info about current dir path) -->
+                <li class="list-group-item top-line-submenu">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <a class="dirButton" alt="go to root directory" ng-click="Actions.openRoot(dir.path)">
+                                <i class="glyphicon glyphicon-folder-open"></i> {{dir.path.rootPath}}...
+                            </a>
+                            <a class="dirButton" alt="go to top directory" ng-click="Actions.openParrent(dir.path)"> <i class="glyphicon glyphicon-arrow-up upButton"></i></a>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><span ng-show="dir.size || dir.size === 0">{{dir.size}} Mb</span><span ng-hide="dir.size || dir.size === 0 || dir.size.lenght" class="glyphicon glyphicon-refresh loading-animate"></span></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 align-center"><span>{{dir.category.totalSmallItems}}</span><span ng-hide="dir.category.totalSmallItems || dir.category.totalSmallItems === 0 || dir.category.totalSmallItems.lenght" class="glyphicon glyphicon-refresh loading-animate"></span></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 align-center"><span>{{dir.category.totalMediumItems}}</span><span ng-hide="dir.category.totalMediumItems || dir.category.totalMediumItems === 0 || dir.category.totalMediumItems.lenght" class="glyphicon glyphicon-refresh loading-animate"></span></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 align-center"><span>{{dir.category.totalBigItems}}</span><span ng-hide="dir.category.totalBigItems || dir.category.totalBigItems === 0 || dir.category.totalBigItems.lenght" class="glyphicon glyphicon-refresh loading-animate"></span></div>
+                    </div>
+                </li>
+                <!-- List of folders(dirs) in current dir path -->
+                <li class="list-group-item" ng-show="dir.folders.length === 0" ng-mouseenter="">no directories</li>
+                <li ng-repeat="folder in dir.folders" class="list-group-item" ng-mouseenter="" ng-mouseleave="">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 wraptext"><a class="folderButton" href="" ng-click="Actions.openDir(folder.path)"><i class="col-xs-1 glyphicon glyphicon-folder-open folder-icon"></i>{{folder.name}}</a></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{folder.size}}<span ng-hide="folder.size || folder.size === 0 || folder.size.lenght" class="glyphicon glyphicon-refresh loading-animate"></span></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 align-center">{{folder.category.totalSmallItems}}<span ng-hide="folder.category.totalSmallItems || folder.category.totalSmallItems === 0 || folder.category.totalSmallItems.lenght" class="glyphicon glyphicon-refresh loading-animate"></span></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 align-center">{{folder.category.totalMediumItems}}<span ng-hide="folder.category.totalMediumItems || folder.category.totalMediumItems === 0 || folder.category.totalMediumItems.lenght" class="glyphicon glyphicon-refresh loading-animate"></span></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 align-center">{{folder.category.totalBigItems}}<span ng-hide="folder.category.totalBigItems || folder.category.totalBigItems === 0 || folder.category.totalBigItems.lenght" class="glyphicon glyphicon-refresh loading-animate"></span></div>
+                    </div>
+                </li>
+                <!-- List of files in current dir path -->
+                <li class="list-group-item" ng-show="dir.files.length === 0" ng-mouseenter="">no files</li>
+                <li ng-repeat="file in dir.files" class="list-group-item" ng-mouseenter="" ng-mouseleave="">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 wraptext"><i class="col-xs-1 glyphicon glyphicon-file file-icon"></i>{{file.name}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{file.size}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<style>
+    .loading-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+</style>

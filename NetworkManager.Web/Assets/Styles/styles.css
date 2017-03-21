@@ -1,0 +1,22 @@
+﻿.sm-m-top{
+    margin-top : 1em;
+}
+.m-m-top{
+    margin-top : 3em;
+}
+.lg-m-top{
+    margin-top : 5em;
+}
+.progress {    height: 10px;
+    border-radius: 0;
+    box-shadow: none;
+    background: #c8c8c8;
+    margin: -5px 0px 5px 0px;
+}
+i .hdd-icon {color:#000;font-size:25px;
+}
+a .hdd-icon{
+display: table;
+    position: static;}
+.list-group .list-group-item .row-content{width:100%;}
+.top-line-menu span{color:#fff;}
